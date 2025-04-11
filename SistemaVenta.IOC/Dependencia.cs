@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using SistemaVenta.DAL.Repositorios.Contrato;
+using SistemaVenta.DAL.Repositorios;
+
 namespace SistemaVenta.IOC
 {
     public static class Dependencia
@@ -19,6 +22,10 @@ namespace SistemaVenta.IOC
             {
                 options.UseSqlServer(configuration.GetConnectionString("cadenaSQL"));//metodo que obtiene la BD 
             });
+
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            services.AddScoped<IVentaRepository, VentaRepository>();
         }
     }
 }
